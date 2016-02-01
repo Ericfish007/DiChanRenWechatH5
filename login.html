@@ -28,7 +28,7 @@
 					还没有账号？
 				</div>
 				<div class="mt10">
-					<a class="btn-orange-border" href="/dichanrenWeiXin/Register.html">注册</a>
+					<a class="btn-orange-border" href="m/login">注册</a>
 				</div>
 		</form>
 	</section>
@@ -59,22 +59,22 @@ $(function(){
 			var psd = $('.pwd input').val().trim();
 			$.ajax({
 				type:'POST',
-				url:'https://www.baidu.com/',
+				url:'/m/login',
 				data:{
   					user: mobile,  //用户名
   					password: psd  //密码
 				},
 				dataType:'json',
 				success:function(data){
-					//if(data.status ===0){
+					if(data.status ===0){
 						alert("登陆成功");
-					//}
+						window.location.href="m/customList"
+					}
 				},
 				error:function(){
 					alert("登陆异常");
 				}
 			})
-			alert(psd);
 		}
 	})
 })

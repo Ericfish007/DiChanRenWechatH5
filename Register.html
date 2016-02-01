@@ -45,7 +45,28 @@
 <script type="text/javascript">
 $(function(){
 	$('.sendVid').on('click',function (e) {
-		alert('测试验证码按钮');
+		var nMobile = $('.username input').val().trim();
+		if(isMobil(nMobile)){
+			$.ajax({
+				type:'POST',
+				url:'/m/sms',
+				data:{
+  					mobile: nMobile,  //用户名
+				},
+				dataType:'json',
+				success:function(data){
+					if(data.status == 0){
+						alert("请输入验证码");
+					}
+				},
+				error:function(){
+					alert("验证码获取异常，请重新获取");
+				}
+			})
+		}else{
+			alert("请输入正确的手机号码");
+			$('.vcode input').focus();
+		}		
 	})
 
 	//注册验证
@@ -66,10 +87,36 @@ $(function(){
 		},
 		happy:function(){
 			//验证通过Ajax提交
-			alert("提交表单");
+			var nMobile = $('.username input').val().trim();
+			var psd = $('.pwd input').val().trim();
+			var vcode = $('.vcode input').val().trim();
+			$.ajax({
+				type:'POST',
+				url:'/m/login',
+				data:{
+  					user: nMobile,  //用户名
+  					code: vcode,   //验证码		
+  					password: psd  //密码
+				},
+				dataType:'json',
+				success:function(data){
+					if(data.status == 0 || data.id ==1){
+						alert("注册成功");
+						window.location.href="m/customList"
+					}
+				},
+				error:function(){
+					alert("注册异常，请重新注册");
+				}
+			})
 		}
 	})
-
+	//手机验证
+	function isMobil(s){
+		var re = /^1\d{10}$/;
+		if (!re.test(s)) return false;
+		return true;
+	}
 })
 
 	
