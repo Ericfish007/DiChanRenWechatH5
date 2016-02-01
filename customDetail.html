@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+	<meta content="yes" name="apple-mobile-web-app-capable" />
+	<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+	<link rel="stylesheet" type="text/css" href="./css/normalize.css" />
+	<link rel="stylesheet" type="text/css" href="./css/custom.css" />
+	<title>职位详情</title>
+</head>
+<body class="gray-bg">
+	<section class="job-detail wrapper mt10">
+		<!-- <dl>
+			<dt class="job-tittle">
+				<h1>市场部总监</h1>
+				<span class="reward">赏金5万</span>
+			</dt>
+			<dd class="job-request" style="">
+				<p>2500/月</p>
+				<p>万科上海分公司<a href="">(>>其他再招职位)</a></p>
+				<p><span>专科及以上</span><span>专科及以上</span><span>专科及以上</span></p>
+			</dd>
+			<dd class="job-place">
+				<div class="icon"><div class="location"></div></div>
+				<p class="">北京市西城区设施实施大姐</p>
+			</dd>
+			<dd class="job-bt">
+				<dl>
+					<dt>职位诱惑</dt>
+					<dd>世界五百强 股票激励</dd>
+				</dl>
+				<dl>
+					<dt>工作职责</dt>
+					<dd>1、编制项目景观技术方案，对各个技术方案进行分负责项目景观的初步设计、施工图设计的过程管
+<br/>2、编制项目景观技术方案，对各个技术方案进行分
+国家开发的公开的方式给房东   </dd>					
+				</dl>
+				<dl>
+					<dt>职位要求</dt>
+					<dd>1、编制项目景观技术方案，对各个技术方案进行分
+负责项目景观的初步设计、施工图设计的过程管</dd>
+				</dl>
+			</dd>
+		</dl> -->		
+	</section>
+	<div class="sub-box-fix">
+			<a id="oneselfBtn" class="fl blue-btn" href="javascript:;">自荐</a>
+			<a class="fr blue-btn" href="javascript:;">推荐候选人<cite class="fn12">（赠100朵云）</cite></a>
+		</div>
+</body>
+<script type="text/javascript" src="./js/zepto1.1.6.min.js"></script>
+<script type="text/javascript" src="./js/layer.js"></script>
+<script type="text/javascript">
+	$(function(){
+		var Detail = {
+  status: 0, 
+  message: 'ok',  
+  data: {  
+    "_id": "5455f6da1a35e241ba9a163c",
+    "Title": "营销部经理",
+    "Company": "某知名央企",
+    "LocationList": {
+      "ProvinceCode": "32",
+      "CityCode": "11",
+      "Province": "江苏"
+    },
+    "Education": "大专",
+    "SalaryMin": 15,
+    "SalaryMax": 20,
+    "Desc": "负责镇江公司50万方项目的营销管理工作,项目主要是高层,小高层,花园洋房"  
+	}
+}
+
+
+function getDetailData(data){
+	if (Object.prototype.toString.call(data) == '[object Object]'){
+		var str = '<dl>'+
+				'<dt class="job-tittle"><h1>'+data.data.Title+'</h1>'+
+				'<span class="reward">赏金5万</span></dt>'+
+				'<dd class="job-request" style="">'+
+					'<p>'+data.data.SalaryMax+'/年</p>'+
+					'<p>'+data.data.Company+'<a href="">(>>其他再招职位)</a></p>'+
+					'<p><span>'+data.data.Education+'</span></p>'+
+				'</dd>'+
+				'<dd class="job-place">'+
+					'<div class="icon"><div class="location"></div></div>'+
+					'<p class="">'+data.data.LocationList.Province+'</p>'+
+				'</dd>'+
+				'<dd class="job-bt">'+
+					'<dl>'+
+						'<dt>职位简介</dt>'+
+						'<dd>'+data.data.Desc+'</dd>'+
+					'</dl>'+
+				'</dd>'+
+			'</dl>';
+	$('.job-detail').append(str);
+	}	
+}
+
+$.get("/position/detail", getDetailData(Detail), 'json');
+
+
+
+
+		$('#oneselfBtn').on('click',function(){
+			//有简版和PC简历
+			// layer.open({
+			//     title: [
+			//         '请选择您要投递的简历'
+			//     ],
+			//     btn:['创建新简版简历','马上投递'],
+			//     content: '<select id="simple-res" name="simple"><option value="简历名称">简版：简历名称</option><option value="简历1">简版：简历1</option><option value="简历2">简版：简历2</option><option value="简历3">简版：简历3</option></select><select id="pc-res" name="pc"><option value="简历1">电脑：简历1</option><option value="简历2">电脑：简历2</option><option value="简历3">电脑：简历3</option><option value="简历4">电脑：简历4</option></select>'    
+			// });
+
+			//只有简版简历
+			// layer.open({
+			//     title: [
+			//         '您有简版简历',
+			//         'font-size:20px'
+			//     ],
+			//     btn:['创建新简版简历','马上投递'],
+			//     content: '<select id="simple-res" name="simple"><option value="简历名称">简版：简历名称</option><option value="简历1">简版：简历1</option><option value="简历2">简版：简历2</option><option value="简历3">简版：简历3</option></select><p>登陆电脑版地产人网，完善简历，您将更容易获得面试机会</p>'    
+			// });
+
+
+			//只有PC版简历
+			// layer.open({
+			//     title: [
+			//         '您有电脑版简历',
+			//         'font-size:20px'
+			//     ],
+			//     btn:['创建新简版简历','马上投递'],
+			//     content: '<select id="simple-res" name="simple"><option value="简历名称">简版：简历名称</option><option value="简历1">简版：简历1</option><option value="简历2">简版：简历2</option><option value="简历3">简版：简历3</option></select><p>登陆电脑版地产人网，完善简历，您将更容易获得面试机会</p>'    
+			// });
+
+			//什么简历都没有
+			layer.open({
+				className:'none-layer',
+			    title: [
+			        '您尚未创建简历，您可以：',
+			        'font-size:20px'
+			    ],
+			    btn:['马上创建'],
+			    content: '请登陆电脑版地产人网创建简历<br/>您也可以<span class="blue">创建简版简历</span>快速投递' ,
+			    yes:function(){
+			    	
+			    }   
+			});
+		})
+	})
+</script>
+</html>

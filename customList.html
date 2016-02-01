@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+	<meta content="yes" name="apple-mobile-web-app-capable" />
+	<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+	<link rel="stylesheet" type="text/css" href="./css/normalize.css" />
+	<link rel="stylesheet" type="text/css" href="./css/custom.css" />
+	<title>职位列表</title>
+</head>
+<body class="gray-bg">
+	<nav class="navlist">
+		<ul>
+			<li class="active">职位</li>
+			<li>地区</li>
+			<li>薪资</li>
+		</ul>
+	</nav>
+	<section class="wrapper mt10" style="display:block">
+	<ul id="cusList">
+		<!-- <li>
+			<a class="list-item" href="*">
+				<h4>android开发实习生</h4>
+				<p class="company">北京中房研协技术服务有限公司<span class="arrow fr"></span></p>
+				<p class="money">$2500/月<span class="reward">赏金5万</span><span class="place fr">上海<time>3天前</time></span></p>
+			</a>
+		</li>
+		<li>
+			<a class="list-item" href="*">
+				<h4>android开发实习生</h4>
+				<p class="company">北京中房研协技术服务有限公司<span class="arrow fr"></span></p>
+				<p class="money">$2500/月<span class="place fr">上海<time>3天前</time></span></p>
+			</a>
+		</li>
+		<li>
+			<a class="list-item" href="*">
+				<h4>android开发实习生</h4>
+				<p class="company">北京中房研协技术服务有限公司<span class="arrow fr"></span></p>
+				<p class="money">$2500/月<span class="place fr">上海<time>3天前</time></span></p>
+			</a>
+		</li> -->
+	</ul>
+	<div class="loading mt10">
+		加载更多<span class="loading-icon"></span>
+	</div>		
+	</section>
+	<section class="wrapper no-customList mt10" style="display:none">
+		<img class="no-customList-bg" src="img/no-customList-bg.jpg">
+		<p>对不起，暂时没有相关职位</p>
+	</section>
+</body>
+<script type="text/javascript" src="./js/zepto1.1.6.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+		var sHeight = $(window).height();
+		var sNav = $('.navlist').height();
+		$('.no-customList').height(sHeight-sNav-10);
+
+		var ListDate={
+			  status: 0,  //0正确 非0发生错误
+			  message: 'ok',  //文本描述，正确或者错误信息
+			  data: [{  //  查询出的职位信息
+				    "_id": "5455f6da1a35e241ba9a163c",
+				    "Title": "营销部经理",
+				    "Company": "某知名央企",
+				    "LocationList": {
+				      "ProvinceCode": "32",
+				      "CityCode": "11",
+				      "Province": "江苏"
+			    	},
+				    "Education": "大专",
+				    "SalaryMin": 15,
+				    "SalaryMax": 20,
+				    "UpdateTime": 132636
+			  		},{  //  查询出的职位信息
+				    "_id": "5455f6da1a35e241ba9a163c",
+				    "Title": "营销部经理2",
+				    "Company": "某知名央企",
+				    "LocationList": {
+				      "ProvinceCode": "32",
+				      "CityCode": "11",
+				      "Province": "江苏"
+			    	},
+				    "Education": "大专",
+				    "SalaryMin": 15,
+				    "SalaryMax": 20,
+				    "UpdateTime": 132636
+			  		}]
+			}
+	//生成列表页面		
+	 function getListData(data){
+	 	//var allstr="";
+	 	for(var i=0; i<data.data.length;i++){
+	 		var str = '<li>'+
+			'<a class="list-item" href="*">'+
+				'<h4>'+data.data[i].Title+'</h4>'+
+				'<p class="company">'+data.data[i].Company+'<span class="arrow fr"></span></p>'+
+				'<p class="money">$'+data.data[i].SalaryMax+'/年<span class="reward">赏金5万</span><span class="place fr">'+data.data[i].LocationList.Province+'<time>'+data.data[i].UpdateTime+'</time></span></p>'+
+			'</a>'+
+		'</li>';	
+			str+= str;	
+	 	}
+	 	$('#cusList').append(str);
+	 }
+
+	getListData(ListDate);
+
+	})
+</script>
+</html>

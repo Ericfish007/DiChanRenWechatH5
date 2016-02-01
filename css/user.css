@@ -1,0 +1,61 @@
+/*Button*/
+.btn-orange, .btn-orange-border{display: block;width: 100%; height: 48px;text-align: center; line-height: 48px; font-size: 24px; text-decoration: none; border-radius:.2em}
+.btn-orange{ color: white;  background-color: #fe9343;}
+.btn-orange-border{color: #545454; border: 1px solid #fe9343;}
+.btn-blue{display: block;width: 100%; height: 48px;text-align: center; line-height: 48px; font-size: 24px; text-decoration: none; border-radius:.2em; color: white;  background-color: #00aeff;}
+
+
+/*Login and Register*/
+.username:after, .pwd:after, .vcode:after{background: url(../img/login-icon.png) no-repeat;content: '';position: absolute;left: 11px;top: 12px;width: 32px;height: 25px;}
+.username:before, .pwd:before, .vcode:before{content: '';position: absolute;left: 11px;top: 12px;width: 32px;height: 25px;}
+.username input, .pwd input, .vcode input{width: 100%; height: 50px; border: 1px solid #3e5e91; padding-left: 50px; font-size: 16px; -webkit-box-sizing:border-box;}
+.login-form{}
+.username input{border-radius: .6em .6em 0 0;}
+.username{width: 100%; position: relative;}
+.username:after{background-position: 4px 0px;}
+.pwd{position: relative;}
+.pwd:after{background-position: 6px -31px;}
+.pwd input{border-top:0;border-radius: 0 0 .6em .6em;}
+.vcode{position: relative;}
+.vcode:after{background-position: 0px -68px;}
+.vcode input{border-top:0;}
+.remark{font-size: 18px; color: #ff9344;}
+.text{font-size: 22px;color: #545454; padding-left: 20px;}
+.Register-form{}
+.Register-form .username .sendVid{position: absolute;right: 0; top:0; z-index: 10;width: 25%; text-align: center; height: 30px; margin:10px 0;line-height: 30px; border-left: 1px solid #3c5e91; color: #3c5e91; font-size: 18px;}
+.agreement label{font-size: 22px; color: #545454;}
+.agreement input{ height: 22px;width: 22px;line-height: 22px; margin-right: 6px; margin-bottom: 4px; vertical-align:middle;}
+
+
+.title-basic{height: 48px; line-height: 48px;font-size: 20px; background-color: #00aeff; color: white; padding-left: 3%;}
+.basic-name input, .basic-job input, .basic-company input, .basic-date input, .basic-phone input, .basic-file,.rec-email input,.rec-phone input,.rec-name input{width: 100%; height: 50px; border: 1px solid #3e5e91; padding-left: 20px; font-size: 16px; -webkit-box-sizing:border-box;}
+.basic-job input, .basic-company input, .basic-date input, .basic-phone input, .basic-file input,.rec-email input,.rec-phone input{border-top:0;}
+.basic-name,.basic-job,.basic-company,.basic-date,.basic-phone,.basic-file,.rec-email,.rec-name,.rec-phone{position: relative;}
+.basic-name:after,.basic-job:after,.basic-company:after,.basic-date:after,.basic-phone:after,.basic-file:after,.rec-email:after,.rec-phone:after,.rec-name:after{content: '*'; position: absolute;left: 10px; top: 17px; color: #00aeff;}
+
+
+
+.my-basic-explain dt{font-size: 20px; color: #545454;}
+.my-basic-explain dd{font-size: 14px; color: #e5e5e5;}
+.basic-form .info-text{height: 48px; line-height: 48px;}
+.basic-name input{border-radius: .6em .6em 0 0;}
+.rec-name input{border-radius: .6em .6em 0 0;}
+.rec-email input{border-top:0;border-radius: 0 0 .6em .6em;}
+.basic-file{border-top:0;border-radius: 0 0 .6em .6em;}
+.basic-file p{height: 50px; line-height: 50px; color: #a9a9a9; position:absolute;}
+.basic-file input{opacity: 0; height: 50px;}
+
+
+
+.useNavList li{float: left; width: 50%; text-align: center; height: 48px; line-height: 48px; font-size: 20px;background-color: #e7ecf3; transition: background 1s,color 1s;}
+.useNavList li.active{background-color: #00aeff;color: #FFF;}
+
+.no-coustom dl{font-size: 20px;}
+.no-coustom dl dt{font-weight: bold; padding-bottom: 20px;}
+.no-coustom dl dd{padding-bottom: 6px;}
+
+.yes-coustom li{display: block;width: 100%; height: 48px; padding-left: 20px;margin-bottom: 10px; line-height: 48px; font-size: 20px; text-decoration: none; border-radius:.2em; color: white;  background-color: #00aeff;box-sizing:border-box;}
+.yes-coustom li .edit{padding-right: 10%; font-size: 14px; padding-left:20px; background:url(../img/edit-icon_01.png) no-repeat 0 18px; background-size: 25%;}
+.yes-coustom .add{display: block;width: 100%; height: 48px;text-align: center; line-height: 44px; font-size: 40px; text-decoration: none; border-radius:.2em;color: #00aeff; border: 1px solid #00aeff;}
+/*验证*/
+.unhappyMessage{position: absolute;left: 60px; top:-8px; background-color: #00aeff;font-size: 12px; color: white; padding:0 6px; border-radius: 0.4em;}

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+	<meta content="yes" name="apple-mobile-web-app-capable" />
+	<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+	<link rel="stylesheet" type="text/css" href="./css/normalize.css" />
+	<link rel="stylesheet" type="text/css" href="./css/user.css" />	
+	<title>注册</title>
+</head>
+<body>
+	<section class="wrapper mt40">
+		<form class="Register-form">
+			<div class="username">
+					<input type="text" placeholder="手机号">
+					<span class="sendVid">发送验证</span>
+			</div>
+			<div class="vcode">
+				<input type="text" placeholder="验证码">
+			</div>
+			<div class="pwd">
+				<input type="password" placeholder="密码">
+			</div>
+			<div class="remark mt30">
+				<p>*如需找回密码，请登陆电脑版地产人网</p>
+			</div>	
+			<div class="agreement mt10">
+				<label><input type="checkbox" checked="checked">地产人网用户协议</label>
+			</div>			
+			<div class="mt20">
+				<a id="registerBtn" class="btn-orange" href="javascript:void(0)">注册</a>
+			</div>
+			<div class="text mt30">
+				已有账号？
+			</div>
+			<div class="mt10">
+				<a class="btn-orange-border" href="/dichanrenWeiXin/login.html">登陆</a>
+			</div>
+		</form>
+	</section>
+</body>
+<script type="text/javascript" src="./js/zepto1.1.6.min.js"></script>
+<script type="text/javascript" src="./js/happy.js"></script>
+<script type="text/javascript">
+$(function(){
+	$('.sendVid').on('click',function (e) {
+		alert('测试验证码按钮');
+	})
+
+	//注册验证
+	$('.Register-form').isHappy({
+		submitButton:'#registerBtn',
+		fields:{
+			'.username input':{
+				required: true,
+                message: '用户名不能为空',                              
+			},
+			'.pwd input':{
+				required: true,
+                message: '密码不能为空且大于6位',
+                test:function(val){
+                	return val.length >= 6;
+                }
+			}
+		},
+		happy:function(){
+			//验证通过Ajax提交
+			alert("提交表单");
+		}
+	})
+
+})
+
+	
+</script>
+</html>

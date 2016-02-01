@@ -1,0 +1,136 @@
+.gray-bg{background-color: #e1e1e1}
+
+/*职位列表*/
+.navlist ul{display:-webkit-box;}
+.navlist ul li{-webkit-box-flex:1.0; text-align: center; height: 48px; line-height: 48px; background-color: #e7ecf3; border-right: 1px solid #e1e1e1; font-size: 20px; color: #545454;transition:background 1s,color 1s; }
+.navlist ul li.active{background-color: #00aeff; color: white;}
+.list-item {background-color: white; margin-bottom: 6px; padding: 0 20px 10px 10px; display: block; text-decoration: none; position: relative;}
+.list-item h4{font-size: 22px; color: #545454; padding-top: 12px; font-weight: normal;}
+.list-item .company{font-size: 18px; color: #999999; padding-top: 8px;}
+.list-item .money{font-size: 18px; color: #00aeff; padding-top: 10px;}
+.list-item .reward{padding:0 10px; margin-left: 4%; border: 1px solid orange; border-radius: 0.2em; color: orange;font-size: 16px;}
+.list-item .money .place{font-size: 16px; color: #999; height: 35px; line-height: 26px;}
+.list-item .money .place time{padding-left: 6px; margin-right: 20px;}
+
+.no-customList{background-color: white; height: 100%;text-align: center;}
+.no-customList .no-customList-bg{padding-top: 100px;}
+.no-customList p{text-align: center; color: #999;}
+
+.arrow{display: block; height: 10px; width: 10px; border-right: 4px solid #00aeff;border-top: 4px solid #00aeff;-webkit-transform: rotate(45deg);transform: rotate(45deg);}
+
+/*投递信息列表*/
+.list-item .message{color: #999; padding-top:4px;}
+.list-item .message span{color: #999;}
+.notes-list .list-item .timeDate{position: absolute;right: 20px; top:17px ; color: #999;}
+.notes-list .list-item .message{color: #00aeff;}
+.notes-list .list-item .message span{color: orange;}
+.progress-list .arrow-right,.progress-list .blue-arrow-right{margin: 8px 2px 0 2px;}
+.progress-list .progress{color: #999; padding-top: 2px;}
+.final-list .list-item .finalText{position: absolute;right: 20px; top:17px ; color: #00aeff;}
+
+/*Loading-icon and animation*/
+.loading{text-align: center; height: 36px; line-height: 36px; font-size: 18px; color: #999; background-color: #eee; border-radius:.4em;}
+.loading-icon{display: inline-block;width: 21px; height: 21px; background: url(../img/loading-icon.png) no-repeat; position: relative; top:4px; left: 8px;
+	-webkit-animation:rotate 2s linear 2s infinite;animation:rotate 2s linear 2s infinite;}
+
+@keyframes rotate
+{
+from {transform: rotate(0deg)}
+to {transform: rotate(360deg)}
+}
+@-webkit-keyframes rotate
+{
+from {transform: rotate(0deg)}
+to {transform: rotate(360deg)}
+}
+/*Loading-icon and animation End*/
+
+/*job-detail-page*/
+.job-detail{background-color: white; border-top: 4px solid #0083e6; margin-bottom: 48px; padding-bottom: 14px;}
+.job-detail dd{margin:0;}
+.job-detail>dl{padding:0 14px;}
+.job-detail .job-tittle{position: relative;}
+.job-detail h1{margin:14px 0 6px 0; font-size: 26px; font-weight: normal; color: #545454;}
+.job-detail .job-tittle .reward{position: absolute;right: 0;top: 6px; border: 1px solid orange; color: orange; padding:0 4px; border-radius: 0.2em }
+.job-detail .job-request p:nth-child(1){color: #00aeff; font-size: 20px;}
+.job-detail .job-request p:nth-child(2){color: #545454; font-size: 18px; margin-bottom: 6px;}
+.job-detail .job-request p:nth-child(2) a{font-size: 14px; color: #999; padding-left: 4px;}
+.job-detail .job-request p:nth-child(3) span{border: 1px solid #545454; color: #545454; font-size: 14px; padding:1px 2px; border-radius: 0.2em; margin-right: 8px;}
+.job-detail .job-place{color: #999; height: 40px; margin:12px 0 0 0; font-size: 14px; border-top:1px solid #e4e4e4; border-bottom:1px solid #e4e4e4;}
+.job-detail .job-place p{display: inline-block; height: 40px; line-height: 40px; position: relative; top: -12px;}
+.job-detail .job-bt dt{color: #999; padding: 12px 0 6px 0 ;}
+
+
+.sub-box-fix{position: fixed;bottom: 0; width: 100%;}
+.blue-btn{width: 49%; height: 48px; line-height: 48px; display: block; font-size: 20px; color: white; text-decoration: none; text-align: center; background-color: #00aeff;}
+/*job-dtail-page  End*/
+
+/*icon Location 图标*/
+div.icon {
+    height: 32px;
+    width: 32px;
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    margin:6px 0 0 0 ;
+}
+
+div.icon div.location {
+    width: 0px;
+    height: 0px;
+    border-style: solid;
+    border-color: #e5e5e5 rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) rgba(0, 0, 0, 0);
+    border-width: 16px 7px 0px 7px;
+    margin: 11px 0px 0 7px;
+}
+
+div.icon div.location:after {
+    content: '';
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    border-radius: 50px;
+    -moz-border-radius: 50px;
+    -webkit-border-radius: 50px;
+    background: #e5e5e5;
+    left: 7px;
+    top: 2px;
+}
+
+div.icon div.location:before {
+    content: '';
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    border-radius: 50px;
+    -moz-border-radius: 50px;
+    -webkit-border-radius: 50px;
+    background: white;
+    left: 11px;
+    top: 6px;
+    z-index: 2;
+}
+
+
+.arrow-right {
+    width:0; 
+    height:0; 
+    border-top:4px solid transparent;
+    border-bottom: 4px solid transparent;
+    border-left: 4px solid #999;
+}
+.blue-arrow-right{
+	width:0; 
+    height:0; 
+    border-top:4px solid transparent;
+    border-bottom: 4px solid transparent;
+	border-left: 4px solid #00aeff;
+}
+/*icon Location 图标 End*/
+
+
+/*弹窗*/
+#simple-res,#pc-res{display: block; width: 100%; border: 1px solid #00aeff; height: 30px;}
+#pc-res{margin-top: 10px;}
+.layermcont p{text-align: left; padding-top: 6px; color: #666;}
+.none-layer .layermbtn {padding-bottom: 10px;}

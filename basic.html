@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+	<meta content="yes" name="apple-mobile-web-app-capable" />
+	<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+	<link rel="stylesheet" type="text/css" href="./css/normalize.css" />
+	<link rel="stylesheet" type="text/css" href="./css/user.css" />
+	<title>基本信息-我的简历</title>
+</head>
+<body>
+	<header>
+		<nav class="title-basic">
+			我的简历
+		</nav>
+	</header>
+	<section class="wrapper">
+		<dl class="my-basic-explain mt20">
+			<dt>1分钟创建简历</dt>
+			<dd>
+				提示：<br/>
+				您可以将简历电子文档或照片，进行上传。<br/>
+				一下信息均必须填。
+			</dd>
+		</dl>
+			<form class="basic-form mt20" action="">
+				<div class="basic-name">
+					<input type="text" placeholder="姓名">
+				</div>
+				<div class="basic-job">
+					<input type="text" placeholder="当前职位">
+				</div>
+				<div class="basic-company">
+					<input type="text" placeholder="当前公司">
+				</div>
+				<div class="basic-date">
+					<input type="text" placeholder="工作年限">
+				</div>
+				<div class="basic-phone">
+					<input type="text" placeholder="手机">
+				</div>
+				<div class="basic-file">
+					<p>请上传附件</p>
+					<input type="file" placeholder="附件上传">
+				</div>
+				<div class="mt40">
+					<a class="btn-blue" href="">完成创建</a>
+				</div>
+			</form>
+	</section>
+</body>
+<script type="text/javascript" src="./js/zepto1.1.6.min.js"></script>
+<script type="text/javascript" src="./js/happy.js"></script>
+<script type="text/javascript">
+	$(function(){
+	//表单验证
+	$('.basic-form').isHappy({
+		submitButton:'.btn-blue',
+		fields:{
+			'.basic-name input':{
+				required: true,
+                message: '信息不能为空'                             
+			},
+			'.basic-job input':{
+				required: true,
+                message: '信息不能为空'                              
+			},
+			'.basic-company input':{
+				required: true,
+                message: '信息不能为空'                              
+			},
+			'.basic-date input':{
+				required: true,
+                message: '信息不能为空'                              
+			},
+			'.basic-phone input':{
+				required: true,
+                message: '请填写正确的手机号码',
+                test:function(val){
+                	return /^1[3458]{1}[0-9]{9}$/.test(val);
+                }                              
+			}
+		},
+		happy:function(){
+			//验证通过Ajax提交
+		}
+	})
+})
+</script>
+</html>
