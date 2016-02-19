@@ -76,44 +76,41 @@
   // 				page_size: 5, //每页数量
   // 				page_index: 1 //页码
 		// 	};
-		var ListDate={
-			  status: 0,  //0正确 非0发生错误
-			  message: 'ok',  //文本描述，正确或者错误信息
-			  data: [{  //  查询出的职位信息
-				    "_id": "5455f6da1a35e241ba9a163c",
-				    "Title": "营销部经理",
-				    "Company": "某知名央企",
-				    "LocationList": {
-				      "ProvinceCode": "32",
-				      "CityCode": "11",
-				      "Province": "江苏"
-			    	},
-				    "Education": "大专",
-				    "SalaryMin": 15,
-				    "SalaryMax": 20,
-				    "UpdateTime": 132636
-			  		},{  //  查询出的职位信息
-				    "_id": "5455f6da1a35e241ba9a163c",
-				    "Title": "营销部经理2",
-				    "Company": "某知名央企",
-				    "LocationList": {
-				      "ProvinceCode": "32",
-				      "CityCode": "11",
-				      "Province": "江苏"
-			    	},
-				    "Education": "大专",
-				    "SalaryMin": 15,
-				    "SalaryMax": 20,
-				    "UpdateTime": 132636
-			  		}]
-			}
+		// var ListDate={
+		// 	  status: 0,  //0正确 非0发生错误
+		// 	  message: 'ok',  //文本描述，正确或者错误信息
+		// 	  data: [{  //  查询出的职位信息
+		// 		    "_id": "5455f6da1a35e241ba9a163c",
+		// 		    "Title": "营销部经理",
+		// 		    "Company": "某知名央企",
+		// 		    "LocationList": {
+		// 		      "ProvinceCode": "32",
+		// 		      "CityCode": "11",
+		// 		      "Province": "江苏"
+		// 	    	},
+		// 		    "Education": "大专",
+		// 		    "SalaryMin": 15,
+		// 		    "SalaryMax": 20,
+		// 		    "UpdateTime": 132636
+		// 	  		},{  //  查询出的职位信息
+		// 		    "_id": "5455f6da1a35e241ba9a163c",
+		// 		    "Title": "营销部经理2",
+		// 		    "Company": "某知名央企",
+		// 		    "LocationList": {
+		// 		      "ProvinceCode": "32",
+		// 		      "CityCode": "11",
+		// 		      "Province": "江苏"
+		// 	    	},
+		// 		    "Education": "大专",
+		// 		    "SalaryMin": 15,
+		// 		    "SalaryMax": 20,
+		// 		    "UpdateTime": 132636
+		// 	  		}]
+		// 	}
 
 	//生成列表页面		
 	 function getListData(options){
 	 	var defaults = {
-  				salary: 500,  //薪资
-  				district: '', //地区
-  				category: '',  //类型
   				page_size: 5, //每页数量
   				page_index: 1 //页码
 			};
