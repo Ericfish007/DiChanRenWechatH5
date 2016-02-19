@@ -19,7 +19,7 @@
 					<input class="error" type="password" placeholder="密码" check="required" >
 				</div>
 				<div class="remark mt30">
-					<p>*如需找回密码，请登陆电脑版地产人网</p>
+					<p>*如需找回密码，请登录电脑版地产人网</p>
 				</div>				
 				<div class="mt20">
 					<a class="btn-orange" href="javascript:void(0)">登录</a>
@@ -37,7 +37,7 @@
 <script type="text/javascript" src="./js/happy.js"></script>
 <script type="text/javascript">
 $(function(){
-	//登陆验证
+	//登录验证
 	$('.login-form').isHappy({
 		submitButton:'.btn-orange',
 		fields:{
@@ -67,12 +67,12 @@ $(function(){
 				dataType:'json',
 				success:function(data){
 					if(data.status ===0){
-						alert("登陆成功");
+						alert("登录成功");
 						window.location.href="/m/customList"
 					}
 				},
 				error:function(){
-					alert("登陆异常");
+					alert("登录异常");
 				}
 			})
 		}
