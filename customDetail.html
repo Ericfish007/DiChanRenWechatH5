@@ -53,6 +53,7 @@
 <script type="text/javascript" src="./js/layer.js"></script>
 <script type="text/javascript">
 	$(function(){
+		//测试数据
 		var Detail = {
   status: 0, 
   message: 'ok',  
@@ -72,36 +73,22 @@
 	}
 }
 
-
-function getDetailData(data){
-	if (Object.prototype.toString.call(data) == '[object Object]'){
-		var str = '<dl>'+
-				'<dt class="job-tittle"><h1>'+data.data.Title+'</h1>'+
-				'<span class="reward">赏金5万</span></dt>'+
-				'<dd class="job-request" style="">'+
-					'<p>'+data.data.SalaryMax+'/年</p>'+
-					'<p>'+data.data.Company+'<a href="">(>>其他再招职位)</a></p>'+
-					'<p><span>'+data.data.Education+'</span></p>'+
-				'</dd>'+
-				'<dd class="job-place">'+
-					'<div class="icon"><div class="location"></div></div>'+
-					'<p class="">'+data.data.LocationList.Province+'</p>'+
-				'</dd>'+
-				'<dd class="job-bt">'+
-					'<dl>'+
-						'<dt>职位简介</dt>'+
-						'<dd>'+data.data.Desc+'</dd>'+
-					'</dl>'+
-				'</dd>'+
-			'</dl>';
-	$('.job-detail').append(str);
-	}	
-}
-
-$.get("/position/detail", getDetailData(Detail), 'json');
-
-
-
+		$.ajax({
+			type:'GET',
+			url:'/m/api/position/detail',
+			data:{
+				id:getQueryString('id')
+			},
+			dataType:'json',
+			success:function(){
+				if(data.status ===0){
+					getDetailData(data);
+				}
+			},
+			error:function(){
+				alert("数据异常");
+			}
+		});
 
 		$('#oneselfBtn').on('click',function(){
 			//有简版和PC简历
@@ -148,6 +135,40 @@ $.get("/position/detail", getDetailData(Detail), 'json');
 			    }   
 			});
 		})
+
+	//获取URL后面的参数
+function getQueryString(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) return unescape(r[2]);
+        return null;
+    };
+
+function getDetailData(data){
+	if (Object.prototype.toString.call(data) == '[object Object]'){
+		var str = '<dl>'+
+				'<dt class="job-tittle"><h1>'+data.data.Title+'</h1>'+
+				'<span class="reward">赏金5万</span></dt>'+
+				'<dd class="job-request" style="">'+
+					'<p>'+data.data.SalaryMax+'/年</p>'+
+					'<p>'+data.data.Company+'<a href="">(>>其他再招职位)</a></p>'+
+					'<p><span>'+data.data.Education+'</span></p>'+
+				'</dd>'+
+				'<dd class="job-place">'+
+					'<div class="icon"><div class="location"></div></div>'+
+					'<p class="">'+data.data.LocationList.Province+'</p>'+
+				'</dd>'+
+				'<dd class="job-bt">'+
+					'<dl>'+
+						'<dt>职位简介</dt>'+
+						'<dd>'+data.data.Desc+'</dd>'+
+					'</dl>'+
+				'</dd>'+
+			'</dl>';
+	$('.job-detail').append(str);
+	}	
+}
+
 	})
 </script>
 </html>
