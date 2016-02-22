@@ -54,24 +54,24 @@
 <script type="text/javascript">
 	$(function(){
 		//测试数据
-		var Detail = {
-  status: 0, 
-  message: 'ok',  
-  data: {  
-    "_id": "5455f6da1a35e241ba9a163c",
-    "Title": "营销部经理",
-    "Company": "某知名央企",
-    "LocationList": {
-      "ProvinceCode": "32",
-      "CityCode": "11",
-      "Province": "江苏"
-    },
-    "Education": "大专",
-    "SalaryMin": 15,
-    "SalaryMax": 20,
-    "Desc": "负责镇江公司50万方项目的营销管理工作,项目主要是高层,小高层,花园洋房"  
-	}
-}
+// 		var Detail = {
+//   status: 0, 
+//   message: 'ok',  
+//   data: {  
+//     "_id": "5455f6da1a35e241ba9a163c",
+//     "Title": "营销部经理",
+//     "Company": "某知名央企",
+//     "LocationList": {
+//       "ProvinceCode": "32",
+//       "CityCode": "11",
+//       "Province": "江苏"
+//     },
+//     "Education": "大专",
+//     "SalaryMin": 15,
+//     "SalaryMax": 20,
+//     "Desc": "负责镇江公司50万方项目的营销管理工作,项目主要是高层,小高层,花园洋房"  
+// 	}
+// }
 
 		$.ajax({
 			type:'GET',
@@ -80,7 +80,7 @@
 				id:getQueryString('id')
 			},
 			dataType:'json',
-			success:function(){
+			success:function(data){
 				if(data.status ===0){
 					getDetailData(data);
 				}
