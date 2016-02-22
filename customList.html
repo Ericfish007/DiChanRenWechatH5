@@ -56,7 +56,6 @@
 		var sHeight = $(window).height();
 		var sNav = $('.navlist').height();
 		$('.no-customList').height(sHeight-sNav-10);
-
 		//执行第一次加载
 		getListData();
 
@@ -66,8 +65,7 @@
 			$(this).html('加载中<span class="loading-icon"></span>');
 			getListData({
 				page_index:sLindex/5
-			})
-			$(this).html('加载更多<span class="loading-icon"></span>');
+			})			
 		})
 		// var query = {
   // 				salary: 500,  //薪资
@@ -76,38 +74,7 @@
   // 				page_size: 5, //每页数量
   // 				page_index: 1 //页码
 		// 	};
-		// var ListDate={
-		// 	  status: 0,  //0正确 非0发生错误
-		// 	  message: 'ok',  //文本描述，正确或者错误信息
-		// 	  data: [{  //  查询出的职位信息
-		// 		    "_id": "5455f6da1a35e241ba9a163c",
-		// 		    "Title": "营销部经理",
-		// 		    "Company": "某知名央企",
-		// 		    "LocationList": {
-		// 		      "ProvinceCode": "32",
-		// 		      "CityCode": "11",
-		// 		      "Province": "江苏"
-		// 	    	},
-		// 		    "Education": "大专",
-		// 		    "SalaryMin": 15,
-		// 		    "SalaryMax": 20,
-		// 		    "UpdateTime": 132636
-		// 	  		},{  //  查询出的职位信息
-		// 		    "_id": "5455f6da1a35e241ba9a163c",
-		// 		    "Title": "营销部经理2",
-		// 		    "Company": "某知名央企",
-		// 		    "LocationList": {
-		// 		      "ProvinceCode": "32",
-		// 		      "CityCode": "11",
-		// 		      "Province": "江苏"
-		// 	    	},
-		// 		    "Education": "大专",
-		// 		    "SalaryMin": 15,
-		// 		    "SalaryMax": 20,
-		// 		    "UpdateTime": 132636
-		// 	  		}]
-		// 	}
-
+		
 	//生成列表页面		
 	 function getListData(options){
 	 	var defaults = {
@@ -121,22 +88,30 @@
 				data:options,
 				dataType:'json',
 				success:function(data){
-					if(data.status ===0){
-						for(var i=0; i<data.data.length;i++){
+					if(data.status === 0){
+						var allstr="";
+						for(var i=0; i<data.data.length; i++){
 	 						var str = '<li>'+
 										'<a class="list-item" href="/m/customDetail?id='+data.data[i]._id+'">'+
 											'<h4>'+data.data[i].Title+'</h4>'+
 											'<p class="company">'+data.data[i].Company+'<span class="arrow fr"></span></p>'+
-											'<p class="money">$'+data.data[i].SalaryMax+'/年<span class="reward">赏金5万</span><span class="place fr">'+data.data[i].LocationList.Province+'<time>'+data.data[i].UpdateTime+'</time></span></p>'+
+											'<p class="money">$'+data.data[i].SalaryMax+'/年<span class="place fr">'+data.data[i].LocationList[0].Province+'<time>'+data.data[i].UpdateTime+'</time></span></p>'+
 										'</a>'+
 									'</li>';	
-							str+= str;	
-	 					}
-	 					$('#cusList').append(str);
+							allstr+= str;	
+	 					};
+	 					$('#cusList').append(allstr);
+	 					$('.loading').html('加载更多<span class="loading-icon"></span>');
+
+					}else{
+						$('.no-customList').show();
+						$('.loading').hide();
 					}
 				},
 				error:function(){
-					alert("登陆异常");
+					alert("数据异常");
+					$('.no-customList').show();
+					$('.loading').hide();
 				}
 			})	 	
 	 }
