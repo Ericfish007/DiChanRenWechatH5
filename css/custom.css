@@ -1,9 +1,10 @@
 .gray-bg{background-color: #e1e1e1}
 
 /*职位列表*/
-.navlist ul{display:-webkit-box;}
-.navlist ul li{-webkit-box-flex:1.0; text-align: center; height: 48px; line-height: 48px; background-color: #e7ecf3; border-right: 1px solid #e1e1e1; font-size: 20px; color: #545454;transition:background 1s,color 1s; }
+.navlist ul{display:-webkit-box;display:flex;}
+.navlist ul li{-webkit-box-flex:1.0; flex:1.0; text-align: center; height: 48px; line-height: 48px; position: relative; background-color: #e7ecf3; border-right: 1px solid #e1e1e1; font-size: 20px; color: #545454;transition:background 1s,color 1s; }
 .navlist ul li.active{background-color: #00aeff; color: white;}
+.navlist select{width: 100%; position:absolute; top: 0; left: 0; height: 48px; opacity: 0;}
 .list-item {background-color: white; margin-bottom: 6px; padding: 0 20px 10px 10px; display: block; text-decoration: none; position: relative;}
 .list-item h4{font-size: 22px; color: #545454; padding-top: 12px; font-weight: normal;}
 .list-item .company{font-size: 18px; color: #999999; padding-top: 8px;}

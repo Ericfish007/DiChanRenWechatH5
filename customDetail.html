@@ -152,12 +152,12 @@ function getDetailData(data){
 				'<span class="reward">赏金5万</span></dt>'+
 				'<dd class="job-request" style="">'+
 					'<p>'+data.data.SalaryMax+'/年</p>'+
-					'<p>'+data.data.Company+'<a href="">(>>其他再招职位)</a></p>'+
+					'<p>'+data.data.Company+'<a href="m/customList">(>>其他再招职位)</a></p>'+
 					'<p><span>'+data.data.Education+'</span></p>'+
 				'</dd>'+
 				'<dd class="job-place">'+
 					'<div class="icon"><div class="location"></div></div>'+
-					'<p class="">'+data.data.LocationList.Province+'</p>'+
+					'<p class="">'+data.data.LocationList[0].Province+'</p>'+
 				'</dd>'+
 				'<dd class="job-bt">'+
 					'<dl>'+

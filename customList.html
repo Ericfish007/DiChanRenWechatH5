@@ -12,9 +12,18 @@
 <body class="gray-bg">
 	<nav class="navlist">
 		<ul>
-			<li class="active">职位</li>
-			<li>地区</li>
-			<li>薪资</li>
+			<li>
+				<p>职位</p>
+				<select id="jobwork"></select>
+			</li>
+			<li>
+				<p>地区</p>
+				<select id="place"></select>
+			</li>
+			<li>
+				<p>薪酬</p>
+				<select id="salary"></select>
+			</li>
 		</ul>
 	</nav>
 	<section class="wrapper mt10" style="display:block">
@@ -115,6 +124,50 @@
 				}
 			})	 	
 	 }
+
+	var posArray = JSON.parse('[{"txt":"项目开发","val":"a"},{"txt":"建筑工程","val":"b"},{"txt":"高级管理","val":"c"},{"txt":"人力资源","val":"d"},{"txt":"财务","val":"e"},{"txt":"市场营销","val":"f"},{"txt":"公关","val":"g"},{"txt":"销售/客服/技术支持","val":"h"},{"txt":"法务","val":"i"},{"txt":"行政","val":"j"},{"txt":"企业信息化","val":"k"},{"txt":"招投标中心","val":"l"},{"txt":"应届生招聘","val":"m"},{"txt":"规划/设计/装潢","val":"n"},{"txt":"互联网/媒体","val":"p"},{"txt":"其他","val":"q"},{"txt":"房地产服务","val":"o"}]');
+
+
+	var cityArray = JSON.parse('[{"txt":"上海","val":"31_"},{"txt":"北京","val":"11_"},{"txt":"广州","val":"44_1"},{"txt":"深圳","val":"44_3"},{"txt":"杭州","val":"33_1"},{"txt":"武汉","val":"42_1"},{"txt":"成都","val":"51_1"},{"txt":"南京","val":"32_1"},{"txt":"天津","val":"12_"},{"txt":"沈阳","val":"21_1"},{"txt":"西安","val":"61_1"},{"txt":"哈尔滨","val":"23_1"},{"txt":"重庆","val":"50_"},{"txt":"青岛","val":"37_2"},{"txt":"济南","val":"37_1"},{"txt":"大连","val":"21_2"},{"txt":"苏州","val":"32_5"},{"txt":"厦门","val":"35_2"}]');
+
+
+	var salaryArray = JSON.parse('[{"txt":"1万以上","val":"1-"},{"txt":"3万以上","val":"3-"},{"txt":"5万以上","val":"5-"},{"txt":"10万以上","val":"10-"},{"txt":"15万以上","val":"15-"},{"txt":"20万以上","val":"20-"},{"txt":"30万以上","val":"30-"},{"txt":"50万以上","val":"50-"},{"txt":"80万以上","val":"80-"},{"txt":"100万以上","val":"100-"}]');
+
+
+	function buildSelectData(id,data){
+		var strALL="";
+		for(var x in data){
+			//console.log(obj[x].txt);
+			var str = '<option value="'+data[x].val+'">'+data[x].txt+'</option>';
+			strALL+=str	;		
+		}
+		$(id).append(strALL);
+	}
+
+	buildSelectData('#jobwork',posArray);
+	buildSelectData('#place',cityArray);
+	buildSelectData('#salary',salaryArray);
+
+
+	$(document).on('change','.navlist',function(e){
+			//alert(e.target.tagName === 'SELECT');
+			var tag = e.target;
+			var district = $('#jobwork').find('option').not(function() {return !this.selected}).val();
+			var category = $('#place').find('option').not(function() {return !this.selected}).val();
+			var salary = $('#salary').find('option').not(function() {return !this.selected}).val();
+
+			if(tag.tagName === 'SELECT'){
+				var slectString = $(tag).find('option').not(function() {return !this.selected}).html();
+				$(tag).parent().find('p').html(slectString);
+			}
+			$('#cusList').html('');
+			getListData({
+				salary: salary,  //薪资
+ 				district: district, //地区
+ 				category: category  //类型
+			})
+		})
+
 	
 	})
 </script>
