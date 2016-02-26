@@ -26,9 +26,30 @@
 			</li>
 		</ul>
 	</nav>
-	<section class="wrapper mt10" style="display:block">
+	<section class="wrapper mt10" id="scroll">
 	<ul id="cusList">
 		<!-- <li>
+			<a class="list-item" href="*">
+				<h4>android开发实习生</h4>
+				<p class="company">北京中房研协技术服务有限公司<span class="arrow fr"></span></p>
+				<p class="money">$2500/月<span class="reward">赏金5万</span><span class="place fr">上海<time>3天前</time></span></p>
+			</a>
+		</li>
+		<li>
+			<a class="list-item" href="*">
+				<h4>android开发实习生</h4>
+				<p class="company">北京中房研协技术服务有限公司<span class="arrow fr"></span></p>
+				<p class="money">$2500/月<span class="place fr">上海<time>3天前</time></span></p>
+			</a>
+		</li>
+		<li>
+			<a class="list-item" href="*">
+				<h4>android开发实习生</h4>
+				<p class="company">北京中房研协技术服务有限公司<span class="arrow fr"></span></p>
+				<p class="money">$2500/月<span class="place fr">上海<time>3天前</time></span></p>
+			</a>
+		</li>
+		<li>
 			<a class="list-item" href="*">
 				<h4>android开发实习生</h4>
 				<p class="company">北京中房研协技术服务有限公司<span class="arrow fr"></span></p>
@@ -62,6 +83,9 @@
 <script type="text/javascript" src="./js/zepto1.1.6.min.js"></script>
 <script type="text/javascript">
 	$(function(){
+		var myScroll = new IScroll('#scroll');
+		document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+
 		var sHeight = $(window).height();
 		var sNav = $('.navlist').height();
 		$('.no-customList').height(sHeight-sNav-10);
