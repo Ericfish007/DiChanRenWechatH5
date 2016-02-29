@@ -83,9 +83,6 @@
 <script type="text/javascript" src="./js/zepto1.1.6.min.js"></script>
 <script type="text/javascript">
 	$(function(){
-		var myScroll = new IScroll('#scroll');
-		document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
-
 		var sHeight = $(window).height();
 		var sNav = $('.navlist').height();
 		$('.no-customList').height(sHeight-sNav-10);

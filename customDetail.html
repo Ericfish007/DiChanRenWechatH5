@@ -54,24 +54,34 @@
 <script type="text/javascript">
 	$(function(){
 		//测试数据
-// 		var Detail = {
-//   status: 0, 
-//   message: 'ok',  
-//   data: {  
-//     "_id": "5455f6da1a35e241ba9a163c",
-//     "Title": "营销部经理",
-//     "Company": "某知名央企",
-//     "LocationList": {
-//       "ProvinceCode": "32",
-//       "CityCode": "11",
-//       "Province": "江苏"
-//     },
-//     "Education": "大专",
-//     "SalaryMin": 15,
-//     "SalaryMax": 20,
-//     "Desc": "负责镇江公司50万方项目的营销管理工作,项目主要是高层,小高层,花园洋房"  
-// 	}
-// }
+		var Detail = {
+  status: 0,  //0正确 非0发生错误
+  message: 'ok',  //文本描述，正确或者错误信息
+  data: {
+    pc: [{  //电脑版简历
+      ResumeName: '我的简历',    //简历名称
+      Type: 0   //类型，0是电脑版
+    }],
+    mobile: [{  //简版简历
+      ResumeName: 'xxx的简历',
+      Type: 1   //类型，1是简版
+    }]
+  }
+}
+var strMobile = '<select id="simple-res" name="simple">';
+							for(var i=0; i< Detail.data.pc.length; i++){
+								var arr = '<option value="简历名称">简版：'+Detail.data.pc[i].ResumeName+'</option>';
+								strMobile +=arr;
+							}
+							strMobile +='</select><select id="pc-res" name="pc">';
+
+							for(var i=0; i< Detail.data.pc.mobile; i++){
+								var arr = '<option value="简历名称">简版：'+Detail.data.mobile[i].ResumeName+'</option>';
+								strMobile +=arr;
+							}							
+							strMobile += '</select><p>登陆电脑版地产人网，完善简历，您将更容易获得面试机会</p>';
+
+alert(strMobile);
 
 		$.ajax({
 			type:'GET',
@@ -91,49 +101,105 @@
 		});
 
 		$('#oneselfBtn').on('click',function(){
-			//有简版和PC简历
-			// layer.open({
-			//     title: [
-			//         '请选择您要投递的简历'
-			//     ],
-			//     btn:['创建新简版简历','马上投递'],
-			//     content: '<select id="simple-res" name="simple"><option value="简历名称">简版：简历名称</option><option value="简历1">简版：简历1</option><option value="简历2">简版：简历2</option><option value="简历3">简版：简历3</option></select><select id="pc-res" name="pc"><option value="简历1">电脑：简历1</option><option value="简历2">电脑：简历2</option><option value="简历3">电脑：简历3</option><option value="简历4">电脑：简历4</option></select>'    
-			// });
+			$.ajax({
+				type:'GET',
+				url:'/m/api/resume/mine',				
+				dataType:'json',
+				success:function(data){
+					if(data.status ===0){
+						if(data.data.pc.length === 0 && data.data.mobile.length === 0){ //什么简历都没有
+							layer.open({
+								className:'none-layer',
+							    title: [
+							        '您尚未创建简历，您可以：',
+							        'font-size:20px'
+							    ],
+							    btn:['马上创建'],
+							    content: '请登陆电脑版地产人网创建简历<br/>您也可以<span class="blue">创建简版简历</span>快速投递' ,
+							    yes:function(){
+							    	window.location.href="m/recommendBasic";
+							    }   
+							});
+						}else if(data.data.pc.length === 0 && data.data.mobile.length > 0){ //只有简版简历
+							var strMobile = '<select id="simple-res" name="simple">';
+							for(var i=0; i< data.data.mobile.length; i++){
+								var arr = '<option value="简历名称">简版：'+data.data.mobile[i].ResumeName+'</option>';
+								strMobile +=arr;
+							}
+							strMobile += '</select><p>登陆电脑版地产人网，完善简历，您将更容易获得面试机会</p>';
+							layer.open({
+							    title: [
+							        '您有简版简历',
+							        'font-size:20px'
+							    ],
+							    btn:['创建新简版简历','马上投递'],
+							    content:strMobile,
+							    yes:function(){
+							    	//创建新版简历
+							    	window.location.href="m/recommendBasic";
+							    },
+							    no:function(){
+							    	//投递简历
+							    }     
+							});
+						}else if(data.data.pc.length > 0 && data.data.mobile.length === 0){//只有PC版简历
+							var strMobile = '<select id="simple-res" name="simple">';
+							for(var i=0; i< data.data.pc.length; i++){
+								var arr = '<option value="简历名称">简版：'+data.data.pc[i].ResumeName+'</option>';
+								strMobile +=arr;
+							}
+							strMobile += '</select><p>登陆电脑版地产人网，完善简历，您将更容易获得面试机会</p>';
+							layer.open({
+							    title: [
+							        '您有电脑版简历',
+							        'font-size:20px'
+							    ],
+							    btn:['创建新简版简历','马上投递'],
+							    content:strMobile,
+							    yes:function(){
+							    	//创建新版简历
+							    	window.location.href="m/recommendBasic";
+							    },
+							    no:function(){
+							    	//投递简历
+							    }     
+							});
+						}else if(data.data.pc.length > 0 && data.data.mobile.length > 0){//有简版和PC简历
+							var strMobile = '<select id="simple-res" name="simple">';
+							for(var i=0; i< data.data.pc.length; i++){
+								var arr = '<option value="简历名称">简版：'+data.data.pc[i].ResumeName+'</option>';
+								strMobile +=arr;
+							}
+							strMobile +='</select><select id="pc-res" name="pc">';
 
-			//只有简版简历
-			// layer.open({
-			//     title: [
-			//         '您有简版简历',
-			//         'font-size:20px'
-			//     ],
-			//     btn:['创建新简版简历','马上投递'],
-			//     content: '<select id="simple-res" name="simple"><option value="简历名称">简版：简历名称</option><option value="简历1">简版：简历1</option><option value="简历2">简版：简历2</option><option value="简历3">简版：简历3</option></select><p>登陆电脑版地产人网，完善简历，您将更容易获得面试机会</p>'    
-			// });
-
-
-			//只有PC版简历
-			// layer.open({
-			//     title: [
-			//         '您有电脑版简历',
-			//         'font-size:20px'
-			//     ],
-			//     btn:['创建新简版简历','马上投递'],
-			//     content: '<select id="simple-res" name="simple"><option value="简历名称">简版：简历名称</option><option value="简历1">简版：简历1</option><option value="简历2">简版：简历2</option><option value="简历3">简版：简历3</option></select><p>登陆电脑版地产人网，完善简历，您将更容易获得面试机会</p>'    
-			// });
-
-			//什么简历都没有
-			layer.open({
-				className:'none-layer',
-			    title: [
-			        '您尚未创建简历，您可以：',
-			        'font-size:20px'
-			    ],
-			    btn:['马上创建'],
-			    content: '请登陆电脑版地产人网创建简历<br/>您也可以<span class="blue">创建简版简历</span>快速投递' ,
-			    yes:function(){
-			    	
-			    }   
+							for(var i=0; i< data.data.pc.mobile; i++){
+								var arr = '<option value="简历名称">简版：'+data.data.mobile[i].ResumeName+'</option>';
+								strMobile +=arr;
+							}							
+							strMobile += '</select><p>登陆电脑版地产人网，完善简历，您将更容易获得面试机会</p>';
+							layer.open({
+							    title: [
+							        '您有电脑版简历',
+							        'font-size:20px'
+							    ],
+							    btn:['创建新简版简历','马上投递'],
+							    content:strMobile,
+							    yes:function(){
+							    	//创建新版简历
+							    	window.location.href="m/recommendBasic";
+							    },
+							    no:function(){
+							    	//投递简历
+							    }     
+							});
+						}
+					}
+				},
+				error:function(){
+					alert("数据异常");
+				}
 			});
+						
 		})
 
 	//获取URL后面的参数
