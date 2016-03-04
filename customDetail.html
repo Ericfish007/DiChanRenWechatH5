@@ -67,21 +67,7 @@
       Type: 1   //类型，1是简版
     }]
   }
-}
-var strMobile = '<select id="simple-res" name="simple">';
-							for(var i=0; i< Detail.data.pc.length; i++){
-								var arr = '<option value="简历名称">简版：'+Detail.data.pc[i].ResumeName+'</option>';
-								strMobile +=arr;
-							}
-							strMobile +='</select><select id="pc-res" name="pc">';
-
-							for(var i=0; i< Detail.data.pc.mobile; i++){
-								var arr = '<option value="简历名称">简版：'+Detail.data.mobile[i].ResumeName+'</option>';
-								strMobile +=arr;
-							}							
-							strMobile += '</select><p>登陆电脑版地产人网，完善简历，您将更容易获得面试机会</p>';
-
-alert(strMobile);
+};
 
 		$.ajax({
 			type:'GET',
@@ -100,13 +86,16 @@ alert(strMobile);
 			}
 		});
 
-		$('#oneselfBtn').on('click',function(){
+		$('#oneselfBtn').on('click',function(){		
+		var index = layer.open({type: 2,shadeClose:false});
+		var posId = getQueryString('id');
 			$.ajax({
 				type:'GET',
 				url:'/m/api/resume/mine',				
 				dataType:'json',
 				success:function(data){
 					if(data.status ===0){
+						layer.close(index);
 						if(data.data.pc.length === 0 && data.data.mobile.length === 0){ //什么简历都没有
 							layer.open({
 								className:'none-layer',
@@ -140,6 +129,9 @@ alert(strMobile);
 							    },
 							    no:function(){
 							    	//投递简历
+							    	var resumeId = $('#simple-res').find('option').not(function() {return !this.selected}).val();
+							    	deliverJob(posId,resumeId);
+
 							    }     
 							});
 						}else if(data.data.pc.length > 0 && data.data.mobile.length === 0){//只有PC版简历
@@ -162,6 +154,8 @@ alert(strMobile);
 							    },
 							    no:function(){
 							    	//投递简历
+							    	var resumeId = $('#simple-res').find('option').not(function() {return !this.selected}).val();
+							    	deliverJob(posId,resumeId);
 							    }     
 							});
 						}else if(data.data.pc.length > 0 && data.data.mobile.length > 0){//有简版和PC简历
@@ -186,16 +180,17 @@ alert(strMobile);
 							    content:strMobile,
 							    yes:function(){
 							    	//创建新版简历
-							    	window.location.href="m/recommendBasic";
+							    	window.location.href="/m/recommendBasic";
 							    },
 							    no:function(){
-							    	//投递简历
+							    	//投递简历 ?????????
 							    }     
 							});
 						}
 					}
 				},
 				error:function(){
+					layer.close(index);
 					alert("数据异常");
 				}
 			});
@@ -234,6 +229,31 @@ function getDetailData(data){
 			'</dl>';
 	$('.job-detail').append(str);
 	}	
+}
+
+
+//投递简历方法
+function deliverJob(posId,resumeId){
+	var sign = layer.open({type: 2,shadeClose:false});
+	$.ajax({
+			type:'POST',
+			url:'/m/api/position/deliver',
+			data:{
+				pos_id:posId,
+				resume_id:resumeId
+			},
+			dataType:'json',
+			success:function(data){
+				layer.close(sign);
+				if(data.status ===0){
+					alert('简历投递成功');
+				}
+			},
+			error:function(){
+				layer.close(sign);
+				alert("数据异常");
+			}
+	});
 }
 
 	})

@@ -25,22 +25,22 @@
 				<dd>1.请登陆电脑版地产人网创建简历</dd>
 				<dd>2.您也可以<span class="blue">创建简版简历</span>快速投递</dd>
 			</dl>		
-			<a class="btn-blue mt40" href="">马上创建</a>
+			<a class="btn-blue mt40" href="/m/myBasic">马上创建</a>
 		</div>
 
 		<div class="yes-coustom mt40">
 			<ul>
-				<li>
-					<span>简版简历：简历名称</span>
+				<!-- <li>
+					<span resume-id="111">简版简历：简历名称</span>
 					<span class="edit fr">修改</span>
-				</li>
+				</li> -->
 			</ul>
 			<div class="add">+</div>
 		</div>
 	</section>
 
 	<!--被推荐简历-->
-	<section class="wrapper recommendCoustom">
+	<!-- <section class="wrapper recommendCoustom">
 		<div class="no-coustom mt40">
 			<dl>
 				<dt>您尚未创建简历，您可以：</dt>
@@ -59,6 +59,58 @@
 			</ul>
 			<div class="add">+</div>
 		</div>
-	</section>
+	</section> -->
 </body>
+<script type="text/javascript" src="./js/zepto1.1.6.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+		//测试数据
+		var Detail = {
+  status: 0,  //0正确 非0发生错误
+  message: 'ok',  //文本描述，正确或者错误信息
+  data: {
+    pc: [{  //电脑版简历
+      ResumeName: '我的简历',    //简历名称
+      Type: 0   //类型，0是电脑版
+    }],
+    mobile: [{  //简版简历
+      ResumeName: 'xxx的简历',
+      Type: 1   //类型，1是简版
+    }]
+  }
+};
+
+
+
+
+		$(document).on('click','.add',function(e){
+			window.location.href="/m/myBasic";
+		});
+		function creatCoustomHtml(){
+			$.ajax({
+				type:'GET',
+				url:'/m/api/resume/mine',				
+				dataType:'json',
+				success:function(data){
+					if(data.status ===0){
+						if(data.data.mobile.length > 0){
+							var strMobile = "";
+							for(var i=0; i< data.data.mobile.length; i++){
+								var str ='<li>'+				
+											'<span resume-id="111">'+data.data.mobile[i].ResumeName+'</span>'+
+											'<span class="edit fr">修改</span>'+	
+										'</li>';
+									strMobile+=	str;
+							}
+							$('.yes-coustom').find('ul').append(strMobile);
+						}
+					}
+				},
+				error:function(){
+					alert("数据异常");
+				}
+			});
+		}
+	})
+</script>
 </html>

@@ -7,50 +7,38 @@
 	<meta content="black" name="apple-mobile-web-app-status-bar-style" />
 	<link rel="stylesheet" type="text/css" href="./css/normalize.css" />
 	<link rel="stylesheet" type="text/css" href="./css/user.css" />
-	<title>基本信息-我推荐的简历</title>
+	<title>基本信息-我的简历</title>
 </head>
 <body>
 	<header>
 		<nav class="title-basic">
-			我推荐的简历
+			我的简历
 		</nav>
 	</header>
 	<section class="wrapper">
 		<dl class="my-basic-explain mt20">
-			<p>快捷创建您要推送的简历</p>
+			<p>快捷创建我的简历</p>
 		</dl>
 			<form class="basic-form mt20" action="">
-				<div class="rec-name">
-					<input type="text" placeholder="推荐人姓名">
-				</div>
-				<div class="rec-phone">
-					<input type="text" placeholder="手机号码">
-				</div>
-				<div class="rec-email">
-					<input type="text" placeholder="邮箱">
-				</div>
-
-				<p class="info-text mt20">被推荐人信息<span class="blue">（必填）</span></p>
-
 				<div class="basic-name">
-					<input type="text" placeholder="姓名">
+					<input type="text" name="name" placeholder="姓名">
 				</div>
 				<div class="basic-job">
-					<input type="text" placeholder="当前职位">
+					<input type="text" name="position" placeholder="当前职位">
 				</div>
 				<div class="basic-company">
-					<input type="text" placeholder="当前公司">
+					<input type="text" name="company" placeholder="当前公司">
 				</div>
 				<div class="basic-date">
-					<input type="text" placeholder="工作年限">
+					<input type="text" name="year" placeholder="工作年限">
 				</div>
 				<div class="basic-phone">
-					<input type="text" placeholder="手机">
+					<input type="text" name="mobile" placeholder="手机">
 				</div>
-				<div class="basic-file">
+				<!-- <div class="basic-file">
 					<p>请上传附件</p>
 					<input type="file" placeholder="附件上传">
-				</div>
+				</div> -->
 				<div class="mt40">
 					<a class="btn-blue" href="">完成创建</a>
 				</div>
@@ -60,7 +48,7 @@
 <script type="text/javascript" src="./js/zepto1.1.6.min.js"></script>
 <script type="text/javascript" src="./js/happy.js"></script>
 <script type="text/javascript">
-	$(function(){
+	$(function(){		
 	//表单验证
 	$('.basic-form').isHappy({
 		submitButton:'.btn-blue',
@@ -94,7 +82,7 @@
 			$.ajax({
 				type:'POST',
 				url:'/m/api/resume/new-resume',
-				data:{},
+				data:$('form').serialize(),
 				dataType:'json',
 				success:function(data){
 					if(data.status ===0){
