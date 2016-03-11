@@ -46,7 +46,7 @@
 	</section>
 	<div class="sub-box-fix">
 			<a id="oneselfBtn" class="fl blue-btn" href="javascript:;">自荐</a>
-			<a class="fr blue-btn" href="javascript:;">推荐候选人<cite class="fn12">（赠100朵云）</cite></a>
+			<a id="recommendBtn" class="fr blue-btn" href="javascript:;">推荐候选人<cite class="fn12">（赠100朵云）</cite></a>
 		</div>
 </body>
 <script type="text/javascript" src="./js/zepto1.1.6.min.js"></script>
@@ -69,6 +69,19 @@
   }
 };
 
+var textDetail={
+	status: 0,  //0正确 非0发生错误
+  message: 'ok',  //文本描述，正确或者错误信息
+  data: [{
+    ResumeName: 'xxx的简历' //简历名称
+  },{
+  	ResumeName: 'xxy的简历' //简历名称
+  }]
+};
+
+//alert(textDetail.data[1].ResumeName);
+
+
 		$.ajax({
 			type:'GET',
 			url:'/m/api/position/detail',
@@ -86,6 +99,7 @@
 			}
 		});
 
+		//一般简历投递
 		$('#oneselfBtn').on('click',function(){		
 		var index = layer.open({type: 2,shadeClose:false});
 		var posId = getQueryString('id');
@@ -104,9 +118,9 @@
 							        'font-size:20px'
 							    ],
 							    btn:['马上创建'],
-							    content: '请登陆电脑版地产人网创建简历<br/>您也可以<span class="blue">创建简版简历</span>快速投递' ,
+							    content: '请登录电脑版地产人网创建简历<br/>您也可以<span class="blue">创建简版简历</span>快速投递' ,
 							    yes:function(){
-							    	window.location.href="m/recommendBasic";
+							    	window.location.href="/m/myBasic";
 							    }   
 							});
 						}else if(data.data.pc.length === 0 && data.data.mobile.length > 0){ //只有简版简历
@@ -115,7 +129,7 @@
 								var arr = '<option value="简历名称">简版：'+data.data.mobile[i].ResumeName+'</option>';
 								strMobile +=arr;
 							}
-							strMobile += '</select><p>登陆电脑版地产人网，完善简历，您将更容易获得面试机会</p>';
+							strMobile += '</select><p>登录电脑版地产人网，完善简历，您将更容易获得面试机会</p>';
 							layer.open({
 							    title: [
 							        '您有简版简历',
@@ -125,7 +139,7 @@
 							    content:strMobile,
 							    yes:function(){
 							    	//创建新版简历
-							    	window.location.href="m/recommendBasic";
+							    	window.location.href="/m/myBasic";
 							    },
 							    no:function(){
 							    	//投递简历
@@ -140,7 +154,7 @@
 								var arr = '<option value="简历名称">简版：'+data.data.pc[i].ResumeName+'</option>';
 								strMobile +=arr;
 							}
-							strMobile += '</select><p>登陆电脑版地产人网，完善简历，您将更容易获得面试机会</p>';
+							strMobile += '</select><p>登录电脑版地产人网，完善简历，您将更容易获得面试机会</p>';
 							layer.open({
 							    title: [
 							        '您有电脑版简历',
@@ -150,7 +164,7 @@
 							    content:strMobile,
 							    yes:function(){
 							    	//创建新版简历
-							    	window.location.href="m/recommendBasic";
+							    	window.location.href="/m/myBasic";
 							    },
 							    no:function(){
 							    	//投递简历
@@ -170,7 +184,7 @@
 								var arr = '<option value="简历名称">简版：'+data.data.mobile[i].ResumeName+'</option>';
 								strMobile +=arr;
 							}							
-							strMobile += '</select><p>登陆电脑版地产人网，完善简历，您将更容易获得面试机会</p>';
+							strMobile += '</select><p>登录电脑版地产人网，完善简历，您将更容易获得面试机会</p>';
 							layer.open({
 							    title: [
 							        '您有电脑版简历',
@@ -180,7 +194,7 @@
 							    content:strMobile,
 							    yes:function(){
 							    	//创建新版简历
-							    	window.location.href="/m/recommendBasic";
+							    	window.location.href="/m/myBasic";
 							    },
 							    no:function(){
 							    	//投递简历 ?????????
@@ -196,6 +210,63 @@
 			});
 						
 		})
+
+		//推荐简历投递	
+		$('#recommendBtn').on('click',function(){
+			var index = layer.open({type: 2,shadeClose:false});
+			var posId = getQueryString('id');
+			$.ajax({
+				type:'GET',
+				url:'/m/api/resume/recommend',				
+				dataType:'json',
+				success:function(data){
+					if(data.status ===0){
+						layer.close(index);
+						if(data.data.length <= 0){ //没有推荐简历
+							layer.open({
+								className:'none-layer',
+							    title: [
+							        '您尚未创建推荐简历，您可以：',
+							        'font-size:20px'
+							    ],
+							    btn:['马上创建'],
+							    content: '请登录电脑版地产人网创建推荐简历<br/>您也可以<span class="blue">创建推荐简历</span>快速投递' ,
+							    yes:function(){
+							    	window.location.href="/m/recommendBasic";
+							    }   
+							});
+						}else{
+							var strMobile = '<select id="simple-res" name="simple">';
+							for(var i=0; i< data.data.length; i++){
+								var arr = '<option value="推荐简历名称">简版：'+data.data[i].ResumeName+'</option>';
+								strMobile +=arr;
+							}
+							strMobile += '</select><p>登录电脑版地产人网，完善推荐简历，您将更容易获得面试机会</p>';
+							layer.open({
+							    title: [
+							        '您有简版简历',
+							        'font-size:20px'
+							    ],
+							    btn:['创建推荐简历','马上投递'],
+							    content:strMobile,
+							    yes:function(){
+							    	//创建新版简历
+							    	window.location.href="/m/recommendBasic";
+							    },
+							    no:function(){
+							    	//投递简历
+							    	var resumeId = $('#simple-res').find('option').not(function() {return !this.selected}).val();
+							    	deliverRecommendJob(posId,resumeId);
+							    }     
+							});
+						}
+					}
+				},
+				error:function(){}
+			})	
+		})
+
+
 
 	//获取URL后面的参数
 function getQueryString(name) {
@@ -232,12 +303,36 @@ function getDetailData(data){
 }
 
 
-//投递简历方法
+//投递简版简历方法
 function deliverJob(posId,resumeId){
 	var sign = layer.open({type: 2,shadeClose:false});
 	$.ajax({
 			type:'POST',
 			url:'/m/api/position/deliver',
+			data:{
+				pos_id:posId,
+				resume_id:resumeId
+			},
+			dataType:'json',
+			success:function(data){
+				layer.close(sign);
+				if(data.status ===0){
+					alert('简历投递成功');
+				}
+			},
+			error:function(){
+				layer.close(sign);
+				alert("数据异常");
+			}
+	});
+}
+
+//投递推荐简历方法
+function deliverRecommendJob(posId,resumeId){
+	var sign = layer.open({type: 2,shadeClose:false});
+	$.ajax({
+			type:'POST',
+			url:'/m/api/position/recommend',
 			data:{
 				pos_id:posId,
 				resume_id:resumeId
