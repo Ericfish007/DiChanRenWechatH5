@@ -8,6 +8,12 @@
 	<link rel="stylesheet" type="text/css" href="./css/normalize.css" />
 	<link rel="stylesheet" type="text/css" href="./css/custom.css" />
 	<title>推荐信息</title>
+	<style>
+	.wrapper{margin-top: 58px;}
+	.wrapper ul{height: 100%; float: left; width: 100%}
+	.navlist{width: 100%;position: fixed;top:0; z-index: 100;}
+	.yidong{translateX:300px}
+	</style>	
 </head>
 <body class="gray-bg">
 	<header>
@@ -19,22 +25,22 @@
 		</ul>
 	</nav>
 	</header>
-	<section class="wrapper mt10">
+	<section class="wrapper clearfix">
 		<!--  投递记录   -->
-		<ul class="notes-list">
-			<li>
+		<ul class="notes-list" >
+			<!-- <li>
 				<a class="list-item" href="">
 					<h4>市场总监</h4>
 					<time class="timeDate">2015.08.06</time>
 					<p class="company">北京中房研协技术服务有限公司</p>
 					<p class="message">投递的简历：<span>某某的简历</span></p>
 				</a>
-			</li>
+			</li> -->
 		</ul>
 
 		<!--  进展通知   -->
-		<ul class="progress-list">
-			<li>
+		<ul class="progress-list" style="display: none; opacity:0">
+			<!-- <li>
 				<a class="list-item" href="">
 					<h4>市场总监</h4>
 					<div class="clearfix progress">
@@ -53,11 +59,11 @@
 					<p class="company">北京中房研协技术服务有限公司</p>
 					<p class="message">投递的简历：<span>某某的简历</span></p>
 				</a>
-			</li>
+			</li> -->
 		</ul>
 		<!--  结果通知   -->
-		<ul class="final-list">
-			<li>
+		<ul class="final-list" style="display: none; opacity:0">
+			<!-- <li>
 				<a class="list-item" href="">
 					<h4>市场总监</h4>
 					<div class="finalText">
@@ -86,12 +92,112 @@
 					<p class="company">北京中房研协技术服务有限公司</p>
 					<p class="message">投递的简历：<span>某某的简历</span></p>
 				</a>
-			</li>
+			</li> -->
 		</ul>
 	</section>
 </body>
 <script type="text/javascript" src="./js/zepto1.1.6.min.js"></script>
+<script type="text/javascript" src="./js/zepto.fx.js"></script>
 <script type="text/javascript">
-	
+	$(function(){
+		//投递流程切换
+		$('.navlist').on('click','li',function(){
+			$(this).addClass('active').siblings().removeClass();
+			var index = $(this).index();
+			$('.wrapper').find('ul').eq(index).siblings().hide().css('opacity', '0');
+			$('.wrapper').find('ul').eq(index).show().animate({opacity:'100'},1000,'ease-out');
+		});
+
+
+		var da = {
+			  status: 0,  //0正确 非0发生错误
+			  message: 'ok',
+			  data: [
+			    {
+			      PositionID: 1,
+			      ResumeName: '谁的简历',
+			      TargetCompany: 'xxx公司', //投递公司
+			      TargetPosition: 'xxx职位',    //投递职位
+			      Status: 0 //投递状态
+			    }
+			  ]
+			};
+
+			//创建投递记录
+			function creatHtmlNotes(data){
+				var str = '';
+				for(var i = 0; i<data.data.length; i++){
+					str += '<li>'+
+								'<a class="list-item" href="">'+
+									'<h4>'+data.data[i].TargetPosition+'</h4>'+
+									'<time class="timeDate"></time>'+
+									'<p class="company">'+data.data[i].TargetPosition+'</p>'+
+									'<p class="message">投递的简历：<span>'+data.data[i].ResumeName+'</span></p>'+
+								'</a>'+
+							'</li>';
+				}
+				$('.notes-list').html(str);
+			}
+			//创建进展通知
+			function creatHtmlProgress(data){
+				var str = '';
+				var sVerify = '<span class="fl blue">审核</span><div class="blue-arrow-right fl"></div><div class="arrow-right fl"></div><div class="arrow-right fl"></div><div class="arrow-right fl"></div><span class="fl">面试</span><div class="arrow-right fl"></div><div class="arrow-right fl"></div><div class="arrow-right fl"></div><div class="arrow-right fl"></div><span class="fl">入职</span>';
+				var sInterview = '<span class="fl">审核</span><div class="arrow-right fl"></div><div class="arrow-right fl"></div><div class="arrow-right fl"></div><div class="blue-arrow-right fl"></div><span class="fl blue">面试</span><div class="blue-arrow-right fl"></div><div class="arrow-right fl"></div><div class="arrow-right fl"></div><div class="arrow-right fl"></div><span class="fl">入职</span>';
+				var sEntry = '<span class="fl">审核</span><div class="arrow-right fl"></div><div class="arrow-right fl"></div><div class="arrow-right fl"></div><div class="arrow-right fl"></div><span class="fl">面试</span><div class="arrow-right fl"></div><div class="arrow-right fl"></div><div class="arrow-right fl"></div><div class="blue-arrow-right fl"></div><span class="fl blue">入职</span>';
+				for(var i = 0; i<data.data.length; i++){
+					str += '<li>'+
+							'<a class="list-item" href="">'+
+								'<h4>'+data.data[i].TargetPosition+'</h4>'+
+								'<div class="clearfix progress">';
+					if(data.data[i].Status === 0){
+						str += sVerify;
+					}else if(data.data[i].Status === 1){
+						str += sInterview;
+					}else{
+						str += sEntry;
+					}				
+
+					str+='</div>'+
+							'<p class="company">北京中房研协技术服务有限公司</p>'+
+							'<p class="message">投递的简历：<span>某某的简历</span></p>'+
+							'</a>'+
+						'</li>';
+				}
+				$('.progress-list').html(str);				
+			}	
+
+
+			function creatHtmlFinal(data){
+				var str = '';
+				var arrStr=['审核不通过','面试不通过','未入职'];
+				for(var i = 0; i<data.data.length; i++){
+					str += '<li>'+
+							'<a class="list-item" href="">'+
+								'<h4>'+data.data[i].TargetPosition+'</h4>'+
+								'<div class="finalText">'+arrStr[data.data[i].Status]+'</div>'+
+								'<p class="company">'+data.data[i].TargetPosition+'</p>'+
+								'<p class="message">投递的简历：<span>'+data.data[i].ResumeName+'</span></p>'+
+							'</a>'+
+						'</li>';
+				}
+				$('.final-list').html(str);
+			}
+
+			$.ajax({
+				type:'get',
+				url:'/m/api/resume/deliver-progress',
+				dataType:'json',
+				success:function(data){
+					if(data.status ===0){
+						creatHtmlNotes(data);
+						creatHtmlProgress(data);
+						creatHtmlFinal(da);
+					}
+				},
+				error:function(){
+					alert("数据异常");
+				}
+			});
+	});
 </script>
 </html>

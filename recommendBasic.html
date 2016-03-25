@@ -21,38 +21,38 @@
 		</dl>
 			<form class="basic-form mt20" action="">
 				<div class="rec-name">
-					<input type="text" placeholder="推荐人姓名">
+					<input type="text" name="name" placeholder="推荐人姓名">
 				</div>
 				<div class="rec-phone">
-					<input type="text" placeholder="手机号码">
+					<input type="text" name="mobile" placeholder="手机号码">
 				</div>
 				<div class="rec-email">
-					<input type="text" placeholder="邮箱">
+					<input type="text" name="email" placeholder="邮箱">
 				</div>
 
 				<p class="info-text mt20">被推荐人信息<span class="blue">（必填）</span></p>
 
 				<div class="basic-name">
-					<input type="text" placeholder="姓名">
+					<input type="text" name="who" placeholder="姓名">
 				</div>
 				<div class="basic-job">
-					<input type="text" placeholder="当前职位">
+					<input type="text" name="position" placeholder="当前职位">
 				</div>
 				<div class="basic-company">
-					<input type="text" placeholder="当前公司">
+					<input type="text" name="company" placeholder="当前公司">
 				</div>
 				<div class="basic-date">
-					<input type="text" placeholder="工作年限">
+					<input type="text" name="year" placeholder="工作年限">
 				</div>
 				<div class="basic-phone">
-					<input type="text" placeholder="手机">
+					<input type="text" name="phone" placeholder="手机">
 				</div>
 				<!-- <div class="basic-file">
 					<p>请上传附件</p>
 					<input type="file" placeholder="附件上传">
 				</div> -->
 				<div class="mt40">
-					<a class="btn-blue" href="">完成创建</a>
+					<a class="btn-blue">完成创建</a>
 				</div>
 			</form>
 	</section>
@@ -65,6 +65,24 @@
 	$('.basic-form').isHappy({
 		submitButton:'.btn-blue',
 		fields:{
+			'.rec-name input':{
+				required: true,
+                message: '信息不能为空'                             
+			},
+			'.rec-phone input':{
+				required: true,
+                message: '请填写正确的手机号码',
+                test:function(val){
+                	return /^1[3458]{1}[0-9]{9}$/.test(val);
+                }                             
+			},
+			'.rec-email input':{
+				required: true,
+                message: '请填写正确的邮箱号' ,
+                test:function(val){
+                	return /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/.test(val);
+                }                            
+			},
 			'.basic-name input':{
 				required: true,
                 message: '信息不能为空'                             
@@ -94,7 +112,7 @@
 			$.ajax({
 				type:'POST',
 				url:'/m/api/resume/new-resume',
-				data:{},
+				data:$('.basic-form').serialize(),
 				dataType:'json',
 				success:function(data){
 					if(data.status ===0){
@@ -104,10 +122,11 @@
 				},
 				error:function(){
 					alert("数据异常");
+					return false;
 				}
 			});
 		}
-	})
-})
+	});
+});
 </script>
 </html>
